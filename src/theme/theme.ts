@@ -26,7 +26,7 @@ const colors = {
 
 const fonts = {
     body: 'Heebo',
-    header: 'Poppins-Bold',
+    header: 'Poppins',
     subHeader: 'Poppins-Regular',
 }
 
