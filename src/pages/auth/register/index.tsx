@@ -1,6 +1,7 @@
 import AuthLayout from '@/components/AuthLayout'
 import { Flex, Button, Box, Link, Text } from '@chakra-ui/react'  
 import { motion } from 'framer-motion'
+import Router from 'next/router'
 import React from 'react'
 
 export default function Register() {
@@ -17,13 +18,12 @@ export default function Register() {
                         Google
                     </Button>
                 </Flex>
-                <Box width="full" display="flex" flexDirection="column"  marginTop="30px" > 
-                    {/* <Link color="brand.primaryColor" fontSize="14px" marginLeft="auto" >Forgot Password?</Link> */}
-                    <Button as={motion.button} whileHover={{ scale: 1.05 }}  _hover={{ bg: "brand.primaryColor" }} fontFamily="body" marginTop="16px" fontSize="14px" fontWeight="700" width="full" color="white" bgColor="brand.primaryColor" height="50px" >CREATE ACCOUNT</Button>
+                <Box width="full" display="flex" flexDirection="column"  marginTop="30px" >  
+                    <Button onClick={()=> Router.push("/auth/verifyemail")} as={motion.button} whileHover={{ scale: 1.05 }}  _hover={{ bg: "brand.primaryColor" }} fontFamily="body" marginTop="16px" fontSize="14px" fontWeight="700" width="full" color="white" bgColor="brand.primaryColor" height="50px" >CREATE ACCOUNT</Button>
                 </Box> 
                 <Flex color="brand.black" width="full" marginTop="32px" fontSize="14px" gap="1" fontWeight="400" justify="center" fontFamily="body" >
                     <Text>Already Have An Account?</Text>
-                    <Link href='/login' color="brand.primaryColor" >Log In</Link>
+                    <Link href='/auth/login' color="brand.primaryColor" >Log In</Link>
                 </Flex>
             </Box>
         </AuthLayout>

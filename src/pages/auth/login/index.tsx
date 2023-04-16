@@ -19,12 +19,12 @@ export default function Login() {
                     </Button>
                 </Flex>
                 <Box width="full" display="flex" flexDirection="column"  marginTop="30px" > 
-                    <Link href='/forgotpassword' color="brand.primaryColor" fontSize="14px" marginLeft="auto" >Forgot Password?</Link>
+                    <Link href='/auth/forgotpassword' color="brand.primaryColor" fontSize="14px" marginLeft="auto" >Forgot Password?</Link>
                     <Button as={motion.button} whileHover={{ scale: 1.05 }}  _hover={{ bg: "brand.primaryColor" }} fontFamily="body" marginTop="16px" fontSize="14px" fontWeight="700" width="full" color="white" bgColor="brand.primaryColor" height="50px" >LOG IN</Button>
                 </Box> 
                 <Flex color="brand.black" width="full" marginTop="32px" fontSize="14px" gap="1" fontWeight="400" justify="center" fontFamily="body" >
                     <Text>Don't Have An Account?</Text>
-                    <Link href='/register' color="brand.primaryColor" >Create One Now</Link>
+                    <Link href='/auth/register' color="brand.primaryColor" >Create One Now</Link>
                 </Flex>
             </Box>
         </AuthLayout>
