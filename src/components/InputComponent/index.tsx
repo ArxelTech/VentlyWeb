@@ -10,10 +10,11 @@ interface Props {
     right?: boolean,
     rightIcon?: any,
     type: string,
+    h?: string,
     [x: string]: any;
 }
 
-export default function InputComponent({left, leftIcon, right, rightIcon, type, ...rest}: Props) {
+export default function InputComponent({left, leftIcon, right, rightIcon, type, h, ...rest}: Props) {
 
     const [showPassword, setShowPassword] = React.useState(false)
     const [intialType, setIntialType] = React.useState(type)
@@ -31,17 +32,17 @@ export default function InputComponent({left, leftIcon, right, rightIcon, type, 
             {left && ( 
                 <InputLeftElement 
                     children={
-                        <Box display="flex" height="60px" justifyContent="center" alignItems="center" marginTop="18px"  marginLeft="12px" >
+                        <Box display="flex" height={h ? h : "60px"} justifyContent="center" alignItems="center" marginTop="18px"  marginLeft="12px" >
                             {leftIcon}
                         </Box>
                     } 
                 />
             )}
-            <Input {...rest} type={intialType} paddingLeft={left ? "45px": ""} fontSize="md" fontWeight="350" bgColor="#f4f4f4" borderColor="#f4f4f4" _hover={{ borderColor: "#f4f4f4"}} focusBorderColor="#f4f4f4" height="60px" />
+            <Input {...rest} type={intialType} paddingLeft={left ? "45px": ""} fontSize="md" fontWeight="350" bgColor="#f4f4f4" borderColor="#f4f4f4" _hover={{ borderColor: "#f4f4f4"}} focusBorderColor="#f4f4f4" height={h ? h : "60px"} />
             {right && ( 
                 <InputRightElement 
                     children={
-                        <Box display="flex" height="60px" justifyContent="center" alignItems="center" marginTop="9px"  marginRight="8px" >
+                        <Box display="flex" height="50px" justifyContent="center" alignItems="center" marginTop="9px"  marginRight="8px" >
                             {rightIcon ? rightIcon : 
                                 <button onClick={()=> ViewPassword()} >
                                     {intialType !== "text" ?   

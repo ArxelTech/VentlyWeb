@@ -9,7 +9,7 @@ import React from 'react'
 export default function index() {
     return (
         <AuthLayout image="/images/5.png" >
-            <Box width="400px" > 
+            <Box width="400px"  > 
                 <Text color="brand.black" fontWeight="600" fontFamily="header" fontSize="3xl" >Welcome, Mike</Text>
                 <Text color="brand.black" fontSize="16px" marginTop="10px"  fontWeight="400" fontFamily="body" lineHeight="35px" >We'd need you to complete your profile in order to finish your account setup</Text> 
                 <Flex justifyContent="center" flexDirection="column" gap="20px" alignItems="center" marginTop="40px" >

@@ -16,8 +16,8 @@ export default function Home() {
           <Text color="brand.black" fontWeight="600" fontFamily="header" fontSize="3xl" >Events Should Be Awesome</Text>
           <Text color="brand.black" fontSize="16px" marginTop="10px"  fontWeight="400" fontFamily="body" >Create An Account Or Log In To Continue</Text>
           <Flex marginTop="32px" gap="4" fontWeight="500" fontFamily="body" >
-            <Button as={motion.button} whileHover={{ scale: 1.1 }}  onClick={()=> Router.push("/auth/login")} _hover={{ bg: "brand.primaryColor" }} fontFamily="body" fontSize="14px" fontWeight="700" paddingX="60px" color="white" bgColor="brand.primaryColor" height="50px" >LOG IN</Button>
-            <Button as={motion.button} whileHover={{ scale: 1.1 }}  onClick={()=> Router.push("/auth/register")} _hover={{ bg: "white" }} fontSize="14px" fontFamily="body" fontWeight="700" paddingX="60px" color="brand.primaryColor" borderWidth="1px" bgColor="white" borderColor="brand.primaryColor" height="50px" >CREATE ACCOUNT</Button>
+            <Button as={motion.button} whileHover={{ scale: 1.1 }}  onClick={()=> Router.push("/auth/login")} _hover={{ bg: "brand.primaryColor" }} fontFamily="body" fontSize="14px" fontWeight="700" paddingX="60px" color="white" bgColor="brand.primaryColor" height="45px" >LOG IN</Button>
+            <Button as={motion.button} whileHover={{ scale: 1.1 }}  onClick={()=> Router.push("/auth/register")} _hover={{ bg: "white" }} fontSize="14px" fontFamily="body" fontWeight="700" paddingX="60px" color="brand.primaryColor" borderWidth="1px" bgColor="white" borderColor="brand.primaryColor" height="45px" >CREATE ACCOUNT</Button>
           </Flex>
         </Box>
       </AuthLayout>

@@ -7,20 +7,20 @@ import React from 'react'
 export default function Interest() {
     return (
         <AuthLayout image="/images/6.png"> 
-            <Box width="600px" > 
+            <Box width="40vw" > 
                 <Text color="brand.black" fontWeight="600" fontFamily="header" fontSize="3xl" >Select Your Interests</Text>
-                <Text color="brand.black" fontSize="16px" marginTop="10px"  fontWeight="400" fontFamily="body" lineHeight="35px" >Please select at least 3 interest categories, we'll use this to set up your event feed</Text>  
-                <Grid width="full" marginTop="30px" marginBottom="20px"  templateColumns='repeat(3, 1fr)' rowGap={3} gap={6}>
-                    <Button  _hover={{ bg: "brand.primaryColor", color: "#fff" }} fontFamily="body" marginTop="16px" fontSize="15px" fontWeight="400" width="full" color="#3e3f41" bgColor="#e9e9e9" height="45px" >
+                <Text color="brand.black" fontSize="16px" marginTop="10px"  fontWeight="400" fontFamily="body" lineHeight="25px" >Please select at least 3 interest categories, we'll use this to set up your event feed</Text>  
+                <Grid width="full" marginTop="30px" marginBottom="20px"  templateColumns='repeat(3, 1fr)' rowGap={3} gap={3}>
+                    <Button  _hover={{ bg: "brand.primaryColor", color: "#fff" }} fontFamily="body"  fontSize="15px" fontWeight="400" width="full" color="#3e3f41" bgColor="#e9e9e9" height="45px" >
                         Auto
                     </Button>
-                    <Button  _hover={{ bg: "brand.primaryColor", color: "#fff" }} fontFamily="body" marginTop="16px" fontSize="15px" fontWeight="400" width="full" color="#3e3f41" bgColor="#e9e9e9" height="45px" >
+                    <Button  _hover={{ bg: "brand.primaryColor", color: "#fff" }} fontFamily="body"  fontSize="15px" fontWeight="400" width="full" color="#3e3f41" bgColor="#e9e9e9" height="45px" >
                         Agiculture
                     </Button>
-                    <Button  _hover={{ bg: "brand.primaryColor", color: "#fff" }} fontFamily="body" marginTop="16px" fontSize="15px" fontWeight="400" width="full" color="#3e3f41" bgColor="#e9e9e9" height="45px" >
+                    <Button  _hover={{ bg: "brand.primaryColor", color: "#fff" }} fontFamily="body"  fontSize="15px" fontWeight="400" width="full" color="#3e3f41" bgColor="#e9e9e9" height="45px" >
                         Entertainment
                     </Button>
-                    <Button  _hover={{ bg: "brand.primaryColor", color: "#fff" }} fontFamily="body" marginTop="16px" fontSize="15px" fontWeight="400" width="full" color="#3e3f41" bgColor="#e9e9e9" height="45px" >
+                    <Button  _hover={{ bg: "brand.primaryColor", color: "#fff" }} fontFamily="body"  fontSize="15px" fontWeight="400" width="full" color="#3e3f41" bgColor="#e9e9e9" height="45px" >
                         Autos
                     </Button>
                 </Grid>
