@@ -11,13 +11,16 @@ interface Props {
 
 export default function DashboardLayout({children, image}: Props) { 
     return (
-        <Box height="100vh" overflow="hidden" width="full"> 
+        <Box height="100vh" overflow="hidden" bg="#f7f8f9" width="full"> 
             <Navbar />
-            <Flex  alignItems="center" >
-                <Box width="fit-content" overflowY="auto" >
+            <Flex width="full" h="full" >
+                <Box width="fit-content" bgColor="white" height="full" overflowY="auto" >
                     <LeftSideBar />
                 </Box>
-                <Box width="fit-content" overflowY="auto" >
+                <Box display="flex" px="18px" pt="25px" flex="1" > 
+                    {children}
+                </Box>
+                <Box width="fit-content" pt="25px" display="flex" flexDirection="column" height="full" pr="20px" overflowY="auto" >
                     <RightSideBar />
                 </Box>
             </Flex>
