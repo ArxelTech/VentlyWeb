@@ -1,15 +1,110 @@
 import AuthLayout from '@/components/AuthLayout'
 import Icon from '@/components/Icon'
 import InputComponent from '@/components/InputComponent'
-import { Flex, Button, Box, Link, Text } from '@chakra-ui/react'  
-import { motion } from 'framer-motion'
+import { Signup as SignupAction } from "../../../actions/SignupAction";
+import {ResendCode} from '../../../actions/Verifyemail'; 
+import { Box, Button, Text, Flex, Link, chakra, Container, Image, shouldForwardProp, useToast } from '@chakra-ui/react' 
+import * as yup from 'yup'
+import { useFormik } from 'formik';
+import { IReturnObject } from '@/globals/ReturnObject'
 import Router from 'next/router'
+import { motion, isValidMotionProp } from 'framer-motion';
 import React from 'react'
 
+const loginSchema = yup.object({
+  email: yup
+    .string()
+    .email("This email is not valid")
+    .required("Your email is required"),
+  password: yup
+    .string()
+    .required("Your password is required")
+    .min(8, "A minimium of 8 characters"),
+    fullName: yup
+    .string()
+    .min(2, "A minimium of 2 characters")
+    .required("Your fullName is required"), 
+});
+
 export default function Register() {
+
+    const [submitting, setSubmitting] = React.useState(false);
+    const [globalDisabled, setGlobalDisabled] = React.useState(false);
+    const toast = useToast()
+
+    // formik
+    const formik = useFormik({
+        initialValues: { email: "", password: "", fullName: ""},
+        validationSchema: loginSchema,
+        onSubmit: () => {},
+    });
+
+    const handleSubmit = async(e: any) => {  
+        e.preventDefault()
+        setSubmitting(true)
+        if (!formik.dirty) { 
+            toast({
+                title: 'Please enter your details to login', 
+                status: 'error',  
+                duration: 3000, 
+                position: "top"
+            })  
+            setSubmitting(false)
+        } else if (!formik.isValid) {
+            toast({
+                title: 'Please fillin the form properly', 
+                status: 'error',  
+                duration: 3000, 
+                position: "top"
+            })   
+            setSubmitting(false)
+        }else {
+          setSubmitting(true);
+          setGlobalDisabled(true);
+          // handle signup here
+          const returnValue: IReturnObject = (await SignupAction(
+            formik.values
+          )) as IReturnObject; 
+        //   alert(`${returnValue.errorData}`);
+            if(returnValue.statusCode === 200 || returnValue.statusCode === 201) { 
+                toast({
+                    title: 'SignUp Sucessful', 
+                    status: 'success',  
+                    duration: 3000, 
+                    position: "top"
+                })   
+                setSubmitting(false);
+                setGlobalDisabled(false);
+                ResendCode();
+                Router.push("/auth/verifyemail")
+                // history.push('./verifyemail')
+            }else if (returnValue.statusCode === 400) {
+                // create appropriate alert later
+                toast({
+                    title: 'Incorrect User Or Password', 
+                    status: 'error',  
+                    duration: 3000, 
+                    position: "top"
+                })  
+                setSubmitting(false)
+            } else if (returnValue.statusCode === 500) {
+                alert(returnValue.errorMessage);
+                toast({
+                    title: returnValue.errorMessage, 
+                    status: 'error',  
+                    duration: 3000, 
+                    position: "top"
+                }) 
+                setSubmitting(false)
+            }
+          
+        }
+    };
+
     return (
         <AuthLayout image="/images/2.png" >
             <Box width="400px" > 
+            <form onSubmit={(e)=> handleSubmit(e)} > 
                 <Text color="brand.black" fontWeight="600" fontFamily="header" fontSize="3xl" >Create Your Account</Text>
                 <Text color="brand.black" fontSize="16px" marginTop="10px"  fontWeight="400" fontFamily="body" >Create your Account To Start Using VENTLY</Text>
                 <Flex width="full" gap="4"  marginTop="30px"  > 
@@ -20,18 +115,34 @@ export default function Register() {
                         Google
                     </Button>
                 </Flex>
-                <Box gap="16px" display="flex" flexDirection="column"  marginTop="30px" >
-                    <InputComponent left={true} type="text" leftIcon={<Icon icon="person" />} placeholder="Full Name" />
-                    <InputComponent left={true} type="email" leftIcon={<Icon icon="email" />} placeholder="Email Address" />
-                    <InputComponent left={true} type="password" leftIcon={<Icon icon="lock" />} right={true} placeholder="Password"  />
+                <Box gap="16px" display="flex" flexDirection="column"  marginTop="30px" >  
+                    <InputComponent 
+                        name="fullName"
+                        onChange={formik.handleChange}
+                        onFocus={() =>
+                            formik.setFieldTouched("fullName", true, true)
+                        } left={true} type="text" leftIcon={<Icon icon="person" />} placeholder="Full Name" error={formik.errors.fullName} touch={formik.touched.fullName}  />   
+                    <InputComponent 
+                        name="email"
+                        onChange={formik.handleChange}
+                        onFocus={() =>
+                            formik.setFieldTouched("email", true, true)
+                        } left={true} type="email" leftIcon={<Icon icon="email" />} placeholder="Email Address" error={formik.errors.email} touch={formik.touched.email} />  
+                    <InputComponent 
+                        name="password"
+                        onChange={formik.handleChange}
+                        onFocus={() =>
+                            formik.setFieldTouched("password", true, true)
+                        } left={true} type="password" leftIcon={<Icon icon="lock" />} right={true} placeholder="Password" error={formik.errors.password} touch={formik.touched.password}  /> 
                 </Box>
                 <Box width="full" display="flex" flexDirection="column"  marginTop="30px" >  
-                    <Button onClick={()=> Router.push("/auth/verifyemail")} as={motion.button} whileHover={{ scale: 1.05 }}  _hover={{ bg: "brand.primaryColor" }} fontFamily="body" marginTop="16px" fontSize="15px" fontWeight="700" width="full" color="white" bgColor="brand.primaryColor" height="60px" >CREATE ACCOUNT</Button>
+                    <Button role='submit' onClick={()=> Router.push("/auth/verifyemail")} as={motion.button} whileHover={{ scale: 1.05 }}  _hover={{ bg: "brand.primaryColor" }} fontFamily="body" marginTop="16px" fontSize="15px" fontWeight="700" width="full" color="white" bgColor="brand.primaryColor" height="60px" >{submitting ? "Loading...": "CREATE ACCOUNT"}</Button>
                 </Box> 
                 <Flex color="brand.black" width="full" marginTop="32px" fontSize="14px" gap="1" fontWeight="400" justify="center" fontFamily="body" >
                     <Text>Already Have An Account?</Text>
                     <Link href='/auth/login' color="brand.primaryColor" >Log In</Link>
                 </Flex>
+            </form>
             </Box>
         </AuthLayout>
     )
