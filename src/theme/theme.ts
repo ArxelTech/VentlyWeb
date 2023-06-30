@@ -9,6 +9,7 @@ export const colorPallette = {
     textInputBackgroundColor: '#F5F5F5',
     darkGrey: '#707070',
     deactivatedColor: '#E61648',
+    activecolor: "#F8F8F8"
 }
 
 const colors = {
@@ -21,13 +22,15 @@ const colors = {
         darkGrey: colorPallette.darkGrey,
         textInputBackground: colorPallette.textInputBackgroundColor,
         deactivatedCOlor: colorPallette.deactivatedColor,
+        activecolor: colorPallette.activecolor,
     }
 }
 
 const fonts = {
     body: 'Heebo',
-    header: 'Poppins-Bold',
-    subHeader: 'Poppins-Regular',
+    header: 'Poppins',
+    subHeader: 'Rubik',
+    rubik: "Rubik"
 }
 
 export const theme = extendTheme({ colors, fonts})
